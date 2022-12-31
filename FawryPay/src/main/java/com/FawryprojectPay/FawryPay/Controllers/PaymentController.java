@@ -24,7 +24,7 @@ public class PaymentController {
     @PostMapping(value="/Donation/Wallet")
     public String DonateByWallet(@RequestParam(required = false) String Email,
                                  @RequestParam(required = false) double Donation,
-                                 @RequestParam(required = false) String Code )
+                                 @RequestParam(required = false) String Code)
     {
         return paymentLogic.DonateByWallet(Email,Donation,Code);
     }

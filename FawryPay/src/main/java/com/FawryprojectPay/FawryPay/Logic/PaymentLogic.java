@@ -1,13 +1,12 @@
 package com.FawryprojectPay.FawryPay.Logic;
-import com.FawryprojectPay.FawryPay.Models.Customer;
-import com.FawryprojectPay.FawryPay.Models.Donations;
-import com.FawryprojectPay.FawryPay.Models.LandlineServices;
-import com.FawryprojectPay.FawryPay.Models.Payment;
+import com.FawryprojectPay.FawryPay.Models.*;
 import org.springframework.stereotype.Service;
 @Service
 public class PaymentLogic {
     public Payment payment;
     public UserLogic DB;
+    public Transaction transaction;
+
     public Donations donations=new Donations();
     public LandlineServices lls=new LandlineServices();
     PaymentLogic(){}
@@ -52,6 +51,8 @@ public class PaymentLogic {
             if (customer.getEmail().equals(Email)) {
                 if (customer.getWalletBalance() >= Donation&&donations.DonationsHS.containsKey(Code)) {
                     customer.setWalletBalance(customer.getWalletBalance() - Donation);
+                    transaction=new Transaction(Donation,"DonationByWallet For : "+donations.DonationsHS.get(Code));
+                    customer.AddTransaction(transaction);
                     return "Donation Successfully "+donations.DonationsHS.get(Code);
                 }
                 else if(customer.getWalletBalance() >= Donation&&!donations.DonationsHS.containsKey(Code)){
@@ -69,6 +70,8 @@ public class PaymentLogic {
             if(customer.getEmail().equals(Email)){
                 if(customer.getCreditBalance()>= Donation&&donations.DonationsHS.containsKey(Code)){
                     customer.setCreditBalance(customer.getCreditBalance() - Donation);
+                    transaction=new Transaction(Donation,"DonationByCreditCard For : "+donations.DonationsHS.get(Code));
+                    customer.AddTransaction(transaction);
                     return "Donation Successfully "+donations.DonationsHS.get(Code);
 
                 }
@@ -87,6 +90,8 @@ public class PaymentLogic {
             if(customer.getEmail().equals(Email)){
                 if(customer.getWalletBalance()>=lls.MonthlyAmount){
                     customer.setWalletBalance(customer.getWalletBalance()-lls.MonthlyAmount);
+                    transaction=new Transaction(lls.MonthlyAmount,"Monthly Receipt By Wallet");
+                    customer.AddTransaction(transaction);
                     return "Receipt Paid Successfully";
                 }
                 else{
@@ -102,6 +107,8 @@ public class PaymentLogic {
             if(customer.getEmail().equals(Email)){
                 if(customer.getWalletBalance()>=lls.QuarterAmount){
                     customer.setWalletBalance(customer.getWalletBalance()-lls.QuarterAmount);
+                    transaction=new Transaction(lls.QuarterAmount,"Quarter Receipt By Wallet");
+                    customer.AddTransaction(transaction);
                     return "Receipt Paid Successfully";
                 }
                 else{
@@ -117,6 +124,8 @@ public class PaymentLogic {
             if(customer.getEmail().equals(Email)){
                 if(customer.getCreditBalance()>=lls.MonthlyAmount){
                     customer.setCreditBalance(customer.getCreditBalance()-lls.MonthlyAmount);
+                    transaction=new Transaction(lls.MonthlyAmount,"Monthly Receipt By Credit Card");
+                    customer.AddTransaction(transaction);
                     return "Receipt Paid Successfully";
                 }
                 else{
@@ -132,6 +141,8 @@ public class PaymentLogic {
             if(customer.getEmail().equals(Email)){
                 if(customer.getCreditBalance()>=lls.QuarterAmount){
                     customer.setCreditBalance(customer.getCreditBalance()-lls.QuarterAmount);
+                    transaction=new Transaction(lls.QuarterAmount,"Quarter Receipt By Credit Card");
+                    customer.AddTransaction(transaction);
                     return "Receipt Paid Successfully";
                 }
                 else{

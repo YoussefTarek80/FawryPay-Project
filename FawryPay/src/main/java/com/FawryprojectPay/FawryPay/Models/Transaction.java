@@ -1,11 +1,21 @@
-//package com.FawryprojectPay.FawryPay.User;
-//
-//import com.FawryprojectPay.FawryPay.DB.Logic.Verifiable;
-//
-//public class Transaction {
-//    private int TransactionNumber=1;
-//    private double TransacationAmount ;
-//    private String ServiceName;
+package com.FawryprojectPay.FawryPay.Models;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
+public class Transaction {
+    private double TransactionAmount ;
+    private String ServiceName;
+    public  Transaction(){
+    }
+    public Transaction(double transactionAmount, String serviceName) {
+        this.TransactionAmount = transactionAmount;
+        this.ServiceName = serviceName;
+
+    }
+}
 //    public void CreateTransaction(USER user, String ServName, double Amount, Verifiable V){
 //
 //        if(ServName =="LandlineServices") {
@@ -32,4 +42,3 @@
 //    public String toString(){
 //        return "["+this.TransactionNumber+"."+"ServiceName=" + this.ServiceName +" || TransctionAmount= "+this.TransacationAmount + "]\n";
 //    }
-//}
