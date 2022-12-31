@@ -1,5 +1,11 @@
 package com.FawryprojectPay.FawryPay.Models;
+
+
+import com.FawryprojectPay.FawryPay.Models.Service;
+
+
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class Donations implements Service {
     public HashMap<String,String>DonationsHS = new HashMap<>(3);

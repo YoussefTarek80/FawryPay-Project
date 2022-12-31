@@ -1,7 +1,14 @@
 package com.FawryprojectPay.FawryPay.Models;
+import com.FawryprojectPay.FawryPay.Logic.UserLogic;
+import com.FawryprojectPay.FawryPay.Models.Customer;
+import com.FawryprojectPay.FawryPay.Models.Service;
+
+
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class LandlineServices implements Service {
+    Scanner scanner = new Scanner(System.in);
     public static double dis = 0.0;
     public HashMap<String,String> LandLineHS = new HashMap<>(2);
     //    Discount Dis ;
@@ -11,6 +18,8 @@ public class LandlineServices implements Service {
         LandLineHS.put("100.0","MonthlyAmount");
         LandLineHS.put("350.0","QuarterAmount");
     }
+
+
 
     @Override
     public void update(int setDiscount) {
