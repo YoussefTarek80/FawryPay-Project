@@ -4,7 +4,7 @@ package com.FawryprojectPay.FawryPay.Models.Services;
 import com.FawryprojectPay.FawryPay.Models.Discount.Discount;
 
 public class MobileRechargeServices implements Service {
-    public static double dis=0.0;
+    public static double dis=0.0;// 10% : 100 -> 90
     MobileRechargeServices(){}
     Discount Dis;
     MobileRechargeServices(Discount D){
