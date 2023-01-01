@@ -1,4 +1,5 @@
 package com.FawryprojectPay.FawryPay.Logic;
+import com.FawryprojectPay.FawryPay.Models.Users.Admin;
 import com.FawryprojectPay.FawryPay.Models.Users.Customer;
 import com.FawryprojectPay.FawryPay.Models.Transaction;
 import org.springframework.stereotype.Service;
@@ -7,7 +8,9 @@ import java.util.List;
 @Service
 public class UserLogic {
     public static List<Customer> usersTable;
-    Transaction transaction;
+    public Transaction transaction;
+    public Customer DB;
+    public Admin admin;
     public UserLogic(){
         usersTable = new ArrayList<>();
     }
@@ -16,12 +19,9 @@ public class UserLogic {
             if(userIT.getEmail().equals(RegisterUser.getEmail()))
                 return "This Email Is Already Exists";
         }
-//        transaction=new Transaction(10,"lls");
-//        RegisterUser.AddTransaction(transaction);
         usersTable.add(RegisterUser);
         return "Registration Has been Success";
     }
-
     public Customer getUserInfo(String email) {
         for (Customer userIT:usersTable){
             if(userIT.getEmail().equals(email))
@@ -39,9 +39,28 @@ public class UserLogic {
     public ArrayList<Transaction> GetTransactions(String email,String password){
         for(Customer customer:usersTable){
             if(customer.getEmail().equals(email)&&customer.getPassword().equals(password)){
-                return customer.getTransctionArr();
+                return customer.getTransactionArr();
             }
         }
         return null;
+    }
+    public String RefundPayment(int transactionID,String Email,String Password){
+        for (Customer userIT:usersTable){
+            if(userIT.getEmail().equals(Email) && userIT.getPassword().equals(Password)){
+                if(userIT.getTransactionArr().size()>transactionID){
+                    for (Transaction Tr:userIT.getTransactionArr()) {
+                        if(Tr.getTransactionID()==transactionID){
+                            userIT.getRefunds().add(Tr);
+                            admin.AllRefundedTransactions.add(Tr);
+                            return "Refund Sent To Admin...";
+                        }
+                    }
+                }
+                else{
+                    return "Transaction not Found...";
+                }
+            }
+        }
+        return "User Not Found...";
     }
 }

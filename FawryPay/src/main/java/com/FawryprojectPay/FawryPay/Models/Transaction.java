@@ -11,15 +11,21 @@ public class Transaction {
     private int TransactionID;
     private double TransactionAmount ;
     private String ServiceName;
-
+    private String Email;
 //    private ArrayList<Transaction> TransctionArr=new ArrayList<>();
 
-    public Transaction(double transactionAmount, String serviceName,int TransactionID) {
+    public Transaction(double transactionAmount, String serviceName,int TransactionID,String Email) {
         this.TransactionAmount = transactionAmount;
         this.ServiceName = serviceName;
         this.TransactionID=TransactionID+1;
+        this.Email=Email;
     }
-
+    public Transaction(double AddedFunds,String Msg,String Email) {
+        this.TransactionAmount = AddedFunds;
+        this.ServiceName = Msg;
+        this.Email=Email;
+//        this.TransactionID =(int) ("Not A Transaction") ;
+    }
 }
 //    public void CreateTransaction(USER user, String ServName, double Amount, Verifiable V){
 //

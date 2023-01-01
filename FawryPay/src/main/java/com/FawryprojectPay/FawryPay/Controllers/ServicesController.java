@@ -23,11 +23,4 @@ public class ServicesController {
     {
         return servicesLogic.GetLandLineServicesList();
     }
-
-
-
-
-
-
-
 }

@@ -32,4 +32,14 @@ public class UserController {
             @RequestParam (required = false) String password){
         return DB.GetTransactions(Email,password);}
 
+    @PostMapping(value = "/USER/Refund")
+    public String RefundPayment(    @RequestParam (required = false) int transactionID,
+                                    @RequestParam (required = false) String Email,
+                                    @RequestParam (required = false) String Password) {
+        return DB.RefundPayment(transactionID,Email,Password);
+    }
+//    @PostMapping(value = "/USER/Refund")
+//    public String RegisterUser(@RequestParam (required = false) int transactionID, @RequestParam (required = false) String Email,
+//                               @RequestParam (required = false) String Password) {
+//        return DB.CheckRegisteredEMAIL(UserRIG);}
 }

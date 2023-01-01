@@ -33,6 +33,13 @@ public class PaymentController {
     {
         return paymentLogic.DonateByCreditCard(Email,Donation,Code);
     }
+    @PostMapping(value="/Donation/Cash")
+    public String DonateByCash(@RequestParam(required = false) String Email,
+                               @RequestParam(required = false) double Donation,
+                               @RequestParam(required = false) String Code )
+    {
+        return paymentLogic.DonateByCash(Email,Donation,Code);
+    }
     @PostMapping(value="/LandLineServices/Wallet/Monthly")
     public String RechargeMonthlyReceiptByWallet(@RequestParam(required = false) String Email)
     {
@@ -53,27 +60,32 @@ public class PaymentController {
     {
         return paymentLogic.RechargeQuarterReceiptByCreditCard(Email);
     }
-    @PostMapping(value="/MobileRechargeServices/Wallet")
-    public String MobileRechargeServicesByWallet(@RequestParam(required = false) String Email,
-                                                 @RequestParam(required = false) String Number,
-                                                 @RequestParam(required = false) String Provider,
-                                                 @RequestParam(required = false) double Amount)
+    @PostMapping(value="/LandLineServices/Cash/Monthly")
+    public String RechargeMonthlyReceiptByCash(@RequestParam(required = false) String Email)
     {
-        return paymentLogic.MobileRechargeServicesByWallet(Number,Email,Provider,Amount);
+        return paymentLogic.RechargeMonthlyReceiptByCash(Email);
     }
-    @PostMapping(value="/InternetRechargeServices/Wallet")
-    public String InternetRechargeServicesByWallet(@RequestParam(required = false) String Email,
+    @PostMapping(value="/LandLineServices/Cash/Quarter")
+    public String RechargeQuarterReceiptByCash(@RequestParam(required = false) String Email)
+    {
+        return paymentLogic.RechargeQuarterReceiptByCash(Email);
+    }
+    @PostMapping(value="/MobileRechargeServices/{PayMethod}")
+    public String MobileRechargeServices(@RequestParam(required = false) String Email,
                                                  @RequestParam(required = false) String Number,
                                                  @RequestParam(required = false) String Provider,
-                                                 @RequestParam(required = false) double Amount)
+                                                 @RequestParam(required = false) double Amount,
+                                                 @PathVariable("PayMethod")String PayMethod)
     {
-        return paymentLogic.InternetRechargeServicesByWallet(Number,Email,Provider,Amount);
+        return paymentLogic.MobileRechargeServices(Number,Email,Provider,Amount,PayMethod);
+    }
+    @PostMapping(value="/InternetRechargeServices/{PayMethod}")
+    public String InternetRechargeServices(@RequestParam(required = false) String Email,
+                                                   @RequestParam(required = false) String Number,
+                                                   @RequestParam(required = false) String Provider,
+                                                   @RequestParam(required = false) double Amount,
+                                                   @PathVariable("PayMethod")String PayMethod)
+    {
+        return paymentLogic.InternetRechargeServices(Number,Email,Provider,Amount,PayMethod);
     }
 }
-//    @GetMapping(value = "/GetCreditCard/{Email}")
-//    public Payment getCreditCardInfo(@PathVariable String Email)
-//    {return paymentLogic.getCreditCardInfo(Email);}
-//    @PostMapping(value="/AddFunds")
-//    public String AddFunds(@RequestBody CreditCard creditCard){
-//        return paymentLogic.AddFunds(creditCard);
-//    }

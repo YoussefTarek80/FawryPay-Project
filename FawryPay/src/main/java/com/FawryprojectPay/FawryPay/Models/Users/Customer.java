@@ -1,10 +1,10 @@
 package com.FawryprojectPay.FawryPay.Models.Users;
 
+import com.FawryprojectPay.FawryPay.Models.Payment.Payment;
 import com.FawryprojectPay.FawryPay.Models.Transaction;
 import lombok.*;
 
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicInteger;
 
 //import static com.FawryprojectPay.FawryPay.Models.Transaction.count;
 
@@ -17,7 +17,9 @@ public class Customer {
     private double WalletBalance;
     private double CreditBalance;
 
-    private  ArrayList<Transaction> TransctionArr=new ArrayList<>();
+    private  ArrayList<Transaction> TransactionArr =new ArrayList<>();
+    private  ArrayList<Payment> TransactionWallet=new ArrayList<>();
+    private  ArrayList<Transaction> Refunds=new ArrayList<>();
 
     public Customer(String UserName,String Email,String Password) {
         this.UserName = UserName;
@@ -26,9 +28,10 @@ public class Customer {
         CreditBalance=0.0;
         WalletBalance=0.0;
     }
-    public  void AddTransaction(Transaction transaction){
-        this.TransctionArr.add(transaction);
+    public void AddTransaction(Transaction transaction){
+        this.TransactionArr.add(transaction);
     }
-
-
+    public void AddTransaction(Payment payment){
+        this.TransactionWallet.add(payment);
+    }
 }
