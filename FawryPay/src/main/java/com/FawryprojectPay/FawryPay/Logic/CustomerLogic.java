@@ -49,18 +49,14 @@ public class CustomerLogic {
     public String RefundPayment(int transactionID,String Email,String Password){
         for (Customer userIT:usersTable){
             if(userIT.getEmail().equals(Email) && userIT.getPassword().equals(Password)){
-                if(userIT.getTransactionArr().size()>transactionID){
-                    for (Transaction Tr:userIT.getTransactionArr()) {
-                        if(Tr.getTransactionID()==transactionID){
-                            userIT.getRefunds().add(Tr);
-                            admin.AllRefundedTransactions.add(Tr);
-                            return "Refund Sent To Admin...";
-                        }
+                for (Transaction Tr:userIT.getTransactionArr()) {
+                    if(Tr.getTransactionID()==transactionID){
+                        userIT.getRefunds().add(Tr);
+                        admin.AllRefundedTransactions.add(Tr);
+                        return "Refund Sent To Admin...";
                     }
                 }
-                else{
-                    return "Transaction not Found...";
-                }
+                return "Transaction not Found...";
             }
         }
         return "User Not Found...";
