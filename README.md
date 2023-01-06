@@ -1,4 +1,4 @@
-# FawryProjectPay
+# FawryPayProject
 (i) How to build the project
     - Download the project and 
       run or load it as a maven project from [FawryPayApplication File].
